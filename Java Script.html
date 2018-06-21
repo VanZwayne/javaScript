@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body{
+    background-image: url("what.jpg");
+	background-image: fixed;
+}
+#fop{
+
+    background-color: rgba(1,0,0,0.6);
+	margin-top:150px;
+	margin-left:150px;
+	margin-right:150px;
+	padding:5px;
+	border-radius: 2px;
+	text-align: center;
+	color:lightblue; 
+}
+#container{
+
+    background-color:rgba(0,0,0,0.9);
+    margin-left:150px;
+    margin-right:150px;
+    border-radius:5px;
+	padding:1px;
+	
+}
+#name{
+
+     margin:5px;
+	 padding:5px;
+	 border-radius:5px;
+}
+#sname{
+	 margin:5px;
+	 padding:5px;
+	 border-radius:5px;
+}
+#age{
+
+	 margin:5px;
+	 padding:5px;
+	 border-radius:5px;
+}
+button{
+    background-color:darkgreen;
+    margin:5px;
+    border-radius:3px;
+	padding:1px;
+	color:white;
+}
+p{
+    background-color:lightgreen;
+	margin:30px;
+	padding: 10px;
+	border-radius: 4px;
+    color:darkblue;
+}
+</style>
+<title>LEONARDO'S CODE</title>
+    <!-- Theme Style -->
+<script	  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+<body>
+
+<div id="fop">
+	<div ng-app >
+		<table id="tbl">
+			<fieldset id = "set" >
+			
+			<label for = "name" >Name(s): </label><input type = "text" id = "name" size "20" value = "" ng-model = "name"> <br>
+			<label for = "sname">Surname:</label><input type = "text" id = "sname" size "20" value = "" ng-model = "sname"> <br>
+			<label for = "age">your age:</label><input type = "text" id = "age" size "20" value = "" ng-model = "age"> <br>
+			<div id = "fldSet">
+
+			</div>
+			<h1> Your name is : {{name}}</h1>
+			<h1> Your surname is : {{sname}}</h1>
+			<h1> Your age is : {{age}}</h1>
+			</fieldset>
+			<fieldset>
+			<button onclick = "myFunction()"> Save data</button> <button onclick="display();">Display</button><button onclick = "cleartags()">Clear</button> </tr></td>
+			</fieldset>
+		</div>	
+    </table>
+</div>
+
+<script >
+
+var data = {name, sname, age};
+var attributes = [];
+var counter = 0;
+	
+function myFunction(){
+
+data.name = document.getElementById("name").value;
+data.sname = document.getElementById("sname").value;
+data.age = document.getElementById("age").value;
+validateForm();
+addToArrayList();
+
+document.getElementById("name").focus();
+}
+
+
+</script>  
+
+<script>
+function validateForm(){
+
+var x = document.getElementById("name").value;
+
+if (x == "")
+{
+alert("Name can not be empty!!");
+windows().refresh;
+}
+
+var i = document.getElementById("sname").value;
+
+if (i == "")
+{
+alert("surname can not be empty!!");
+windows().refresh;
+}
+var a = document.getElementById("age").value;
+
+if (a == "")
+{
+ alert("age can not be empty");
+ windows().refresh;
+}else if (isNaN(a))
+{
+	alert("age can only be numeric!!");
+	 windows().refresh;
+	 
+}
+return false;
+}
+
+</script>
+<script>
+
+
+function display(){
+
+		var container ;
+		var ptag ;
+		var counter = -1;
+		var fldSet = document.getElementById("set");
+		var div = document.createElement("div");
+		div.setAttribute("id","container");
+		fldSet.appendChild(div);
+	
+		for(var i in attributes){
+		
+			ptag = document.createElement("p");
+			ptag.setAttribute("id","lbl");
+			counter= counter +1;
+		
+			ptag.innerHTML = attributes[i]+"";
+			container = document.getElementById("container");
+			container.appendChild(ptag);
+			
+			var btn = document.createElement("input");
+			btn.setAttribute("type","button");
+			btn.setAttribute("value","Delete");
+			btn.setAttribute("style"," background-color:red;margin:10px;border-radius: 1px;padding:1px")
+			ptag.appendChild(btn);
+			btn.setAttribute("onclick","remove()");
+			
+			var btnUpdate = document.createElement("input");
+			btnUpdate.setAttribute("type","button");
+			btnUpdate.setAttribute("value","Update");
+			btnUpdate.setAttribute("style"," background-color:blue;margin:10px;border-radius: 1px;padding:1px")
+			ptag.appendChild(btnUpdate);
+			btnUpdate.setAttribute("onclick","updateTag()");
+
+		}
+}
+function cleartags()
+{	
+	var container = document.getElementById("container");
+	container.remove();
+	
+	//attributes = [];
+	
+	var fldSet = document.getElementById("fldSet");
+	var div = document.createElement("div");
+	div.setAttribute("id","container");
+	fldSet.appendChild(div);
+	
+	
+
+
+	
+}
+	
+function addToArrayList(){
+
+	data.name = document.getElementById("name").value;
+	data.sname = document.getElementById("sname").value;
+	data.age = document.getElementById("age").value;
+
+	document.getElementById('name').value = "";
+	document.getElementById('sname').value = "";
+	document.getElementById('age').value = "";
+	
+	var studDetails="Name: " + data.name+" Surname "+data.sname+" age: "+data.age+"";	
+	attributes.push(studDetails);
+
+}
+function remove()
+{
+
+	var nid = document.getElementById("lbl");
+	nid.remove();
+	attributes.splice(counter);
+}	
+function updateTag()
+{
+
+	
+	var nid = document.getElementById("lbl");
+	lbl.innerHTML = "";
+	var label, txtName;
+	label = document.createElement("label");
+	label.appendChild(document.createTextNode("new name:"));
+	txtName = document.createElement("input");
+	txtName = (txtName);
+	txtName.id = "idname";
+	txtName.style = "margin:5px;padding:3px;border-radius:5px;"
+	label.appendChild(txtName);
+	document.getElementById("lbl").appendChild(label);
+
+	var label, txtsName;
+	label = document.createElement("label");
+	label.appendChild(document.createTextNode(" new sname:"));
+	txtsName = document.createElement("input");
+	txtsName.style = "margin:5px;padding:3px;border-radius:5px;"
+	txtsName.type = "text";
+	txtsName.id = "idsname";
+
+	label.appendChild(txtsName);
+	document.getElementById("lbl").appendChild(label);
+	
+	var label, txtAge;
+	label = document.createElement("label");
+	label.appendChild(document.createTextNode(" new Age:"));
+	txtAge = document.createElement("input");
+	txtAge.style = "margin:5px;padding:3px;border-radius:5px;"
+	txtsName.type = "text";
+	txtAge.id = "idage";
+
+	label.appendChild(txtAge);
+	document.getElementById("lbl").appendChild(label);
+	
+	var btnSave = document.createElement("input");
+	btnSave.setAttribute("type","button");
+	btnSave.setAttribute("value","Save");
+	btnSave.setAttribute("style", "background-color:yellow;margin:10px;border-radius: 1px;padding:1px");
+	lbl.appendChild(btnSave);
+	btnSave.setAttribute("onclick","saveUpdates()");
+
+	document.getElementById("idname").value = data.name;
+	document.getElementById("idsname").value = data.sname;
+	document.getElementById("idage").value = data.age;
+}
+function saveUpdates()
+{
+	data.name	= document.getElementById("idname").value;
+	data.sname = document.getElementById("idsname").value;
+	data.age = document.getElementById("idage").value;
+	
+	var studDetails="Name: " + data.name+" Surname "+data.sname+" age: "+data.age+"";	
+	attributes[counter] = studDetails;
+	
+	var nid = document.getElementById("lbl");
+	lbl.innerHTML = "";
+	display();
+}
+</script>
+
+
+</body>
+</html>
+ 
+ 
